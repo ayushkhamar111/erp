@@ -52,7 +52,7 @@ async function login(req, res) {
   const user = await User.findOne({ username });
   if (!user) return res.status(400).json({status:false, message: 'User not found' });
 
-  if(user.status != 1) return res.status(400).json({status:false, message: 'User Is Inactive' });
+  if(user.status != INACTIVE) return res.status(400).json({status:false, message: 'User Is Inactive' });
   
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(400).json({status:false, message: 'Invalid credentials' });

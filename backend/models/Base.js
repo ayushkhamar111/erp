@@ -2,10 +2,6 @@
 const mongoose = require('mongoose');
 
 const baseModelFields = {
-  status: {
-    type: Number,
-    default: 1
-  },
   created_by: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -34,7 +30,6 @@ const baseModelFields = {
 };
 
 const applyBaseSchemaMiddleware = (schema) => {
-  // Automatically update the updated_at field before save
   schema.pre('save', function (next) {
     this.updated_at = new Date();
     next();
