@@ -1,11 +1,3 @@
-const ACTIVE = 1;
-const INACTIVE = 2;
-
-const STATUSES = {
-  [ACTIVE]: 'Active',
-  [INACTIVE]: 'Inactive'
-};
-
 const mongoose = require('mongoose');
 const { baseModelFields, applyBaseSchemaMiddleware } = require('./Base');
 
@@ -20,7 +12,7 @@ const userSchemaFields = {
   },
   status: {
     type: Number,
-    default: ACTIVE  
+    default: 1  
   },
   ...baseModelFields  
 };
@@ -28,6 +20,12 @@ const userSchemaFields = {
 const UserSchema = new mongoose.Schema(userSchemaFields);
 
 applyBaseSchemaMiddleware(UserSchema);
+
+UserSchema.statics.STATUS = {
+  ACTIVE: 1,
+  INACTIVE: 0,
+};
+
 
 module.exports = mongoose.model('User', UserSchema);
 

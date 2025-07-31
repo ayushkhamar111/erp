@@ -2,6 +2,7 @@ const User = require('../Models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 async function registerUser(req, res) {
   try {
     const { username, password, repeatPassword } = req.body;
@@ -51,8 +52,8 @@ async function login(req, res) {
 
   const user = await User.findOne({ username });
   if (!user) return res.status(400).json({status:false, message: 'User not found' });
-
-  if(user.status != INACTIVE) return res.status(400).json({status:false, message: 'User Is Inactive' });
+  
+  if(user.status == User.STATUS.INACTIVE) return res.status(400).json({status:false, message: 'User Is Inactive' });
   
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(400).json({status:false, message: 'Invalid credentials' });
@@ -61,6 +62,11 @@ async function login(req, res) {
   res.json({ status:true,message: 'Login Ssuccessful',token });
 }
 
+async function logout  (req, res)  {
+  // If you're storing tokens in client (like localStorage), just tell client to clear token
+  res.status(200).json({ status:true,message: 'Logged out successfully.' });
+};
+
 module.exports = {
-  registerUser,login
+  registerUser,login,logout
 };
