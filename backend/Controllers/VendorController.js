@@ -1,10 +1,12 @@
 const Vendor = require('../Models/Vendor');
 const { validateVendorInput } = require('../Validator/vendorValidator');
+const messages = require('../lang/messages.json');
+const words = require('../lang/words.json');
 
 
 async function list(req, res) {
     vendors = await Vendor.find();
-    res.status(200).json({ status: true, message: 'Vendor data Fetched', vendors });
+    res.status(200).json({ status: true, message: words.vendor + messages,data_fetched, vendors });
 }
 
 async function create(req, res) {
@@ -16,7 +18,7 @@ async function create(req, res) {
 
     const vendor = new Vendor(req.body);
     await vendor.save();
-    res.status(200).json({ status: true, message: 'Vendor Created successfully', vendor });
+    res.status(200).json({ status: true, message: words.vendor + messages,created_successfully, vendor });
 
 }
 async function updateVendor(req, res) {
@@ -24,7 +26,7 @@ async function updateVendor(req, res) {
 
         const vendor = await Vendor.findById(req.params.id);
         if (!vendor) {
-            return res.status(404).json({ status: false, message: 'Vendor not found' });
+            return res.status(404).json({ status: false, message: words.vendor + messages,not_found });
         }
 
         Object.assign(vendor, req.body);
@@ -32,7 +34,7 @@ async function updateVendor(req, res) {
 
         res.status(200).json({
             status: true,
-            message: 'Vendor Updated successfully',
+            message: words.vendor + messages,updated_successfully,
             data: updateVendor
         });
     } catch (error) {
@@ -45,14 +47,14 @@ async function deleteVendor(req, res) {
         const vendor = await Vendor.findById(req.params.id);
 
         if (!vendor) {
-            return res.status(404).json({ status: false, message: 'Vendor not found' });
+            return res.status(404).json({ status: false, message: words.vendor + messages,not_found });
         }
 
         await Vendor.findByIdAndDelete(req.params.id);
 
         res.status(200).json({
             status: true,
-            message: 'Vendor Deleted successfully',
+            message: words.vendor + messages,deleted_successfully,
         });
     } catch (error) {
         res.status(500).json({ status: false, message: 'Error updating vendor', error });
