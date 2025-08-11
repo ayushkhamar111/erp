@@ -7,8 +7,8 @@ async function list(req, res) {
 }
 
 async function create(req, res) {
-    const { name } = req.body;
-    const material = new Material({ name });
+
+    const material = new Material(req.body);
     await material.save();
     res.status(200).json({ status: true, message: 'Material Created successfully', material });
 

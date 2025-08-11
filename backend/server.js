@@ -23,6 +23,9 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/branches',authenticate, require('./Routes/branch'));
 app.use('/api/material',authenticate, require('./Routes/material'));
 app.use('/api/vendor',authenticate, require('./Routes/vendor'));
+app.use('/api/unit',authenticate, require('./Routes/unit'));
+app.use('/api/account-type',authenticate, require('./Routes/accounttype'));
+app.use('/api/chartofaccount',authenticate, require('./Routes/chartofaccount'));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);

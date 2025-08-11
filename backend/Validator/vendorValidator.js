@@ -14,7 +14,7 @@ function validateVendorInput(data) {
     if (!/^\d+$/.test(mobile_no)) {
       errors.push({ field: 'mobile_no', message: messages.mobile_no_validation });
     } else if (mobile_no.length !== 10) {
-      errors.push({ field: 'mobile_no', message: messages.mobile_no__min_maxvalidation });
+      errors.push({ field: 'mobile_no', message: messages.mobile_no_min_max_validation });
     }
   }
 

@@ -1,4 +1,9 @@
 {
   "vendor": "Vendor",
-  "material": "Material"
+  "material": "Material",
+  "unit": "Unit",
+  "account_type" : "Account Type",
+  "chart_of_accounts" : "Chart Of Accounts",
+  "goods" : "GOODS",
+  "service" : "SERVICE"
 }

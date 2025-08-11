@@ -4,10 +4,12 @@
   "logout_success": "You have been logged out.",
   "error_occurred": "An error occurred. Please try again.",
   "name_required": "Name is required.",
-  "mobile_no__min_maxvalidation":"Mobile number must be exactly 10 digits.",
-  "created_successfully":"Created Successfully.",
-  "updated_successfully":"Updated successfully.",
-  "deleted_successfully":"Deleted successfully.",
-  "data_fetched":"data Fetched.",
-  "not_found": "not found"
+  "mobile_no_min_max_validation":"Mobile number must be exactly 10 digits.",
+  "created_successfully":" Created Successfully.",
+  "updated_successfully":" Updated successfully.",
+  "deleted_successfully":" Deleted successfully.",
+  "data_fetched":" Data Fetched.",
+  "not_found": "not found",
+  "internal_server_error" : "Internal server error",
+  "error_deleting" : "Error Deleting "
 }
