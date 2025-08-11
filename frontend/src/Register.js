@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 
-function Login() {
+function Register() {
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,14 +26,24 @@ function Login() {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
+      if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match');
+        setLoading(false);
+        return;
+      }
+      
+      const res = await axios.post('http://localhost:5000/api/auth/register', {
         username: formData.username,
-        password: formData.password
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword
       });
+      
+      // Auto login after successful registration
       localStorage.setItem('token', res.data.token);
       window.location.href = '/branches';
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.data?.message || 'An error occurred during registration');
     } finally {
       setLoading(false);
     }
@@ -44,7 +56,7 @@ function Login() {
           <div className="auth-header">
             <div className="logo">
               <h1>ERP System</h1>
-              <p>Sign In to Your Account</p>
+              <p>Create Your Account</p>
             </div>
           </div>
           
@@ -57,7 +69,7 @@ function Login() {
               )}
 
               <div className="form-group">
-                <label htmlFor="username">Username or Email</label>
+                <label htmlFor="username">Username</label>
                 <input
                   type="text"
                   id="username"
@@ -65,7 +77,22 @@ function Login() {
                   value={formData.username}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter your username or email"
+                  placeholder="Enter your username"
+                  minLength="3"
+                  maxLength="30"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your email"
                 />
               </div>
 
@@ -79,16 +106,24 @@ function Login() {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your password"
+                  minLength="8"
                 />
+                <small className="password-hint">
+                  Password must be at least 8 characters with uppercase, lowercase, number, and special character
+                </small>
               </div>
 
-              <div className="form-options">
-                <label className="checkbox-label">
-                  <input type="checkbox" />
-                  <span className="checkmark"></span>
-                  Remember me
-                </label>
-                <a href="#" className="forgot-password">Forgot Password?</a>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Confirm your password"
+                />
               </div>
 
               <button 
@@ -99,20 +134,20 @@ function Login() {
                 {loading ? (
                   <span className="loading-spinner"></span>
                 ) : (
-                  'Sign In'
+                  'Create Account'
                 )}
               </button>
             </form>
 
             <div className="auth-footer">
               <p>
-                Don't have an account? 
+                Already have an account? 
                 <button 
                   type="button" 
                   className="toggle-btn"
-                  onClick={() => window.location.href = '/register'}
+                  onClick={() => window.location.href = '/'}
                 >
-                  Sign Up
+                  Sign In
                 </button>
               </p>
             </div>
@@ -123,4 +158,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register; 
