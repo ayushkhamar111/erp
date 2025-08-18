@@ -59,7 +59,7 @@ async function login(req, res) {
   if (!isMatch) return res.status(400).json({status:false, message: 'Invalid credentials' });
 
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-  res.json({ status:true,message: 'Login Ssuccessful',token });
+  res.json({ status:true,message: 'Login successfully',token,user });
 }
 
 async function logout  (req, res)  {

@@ -4,8 +4,8 @@ const AccountType = require("../Models/AccountType");
 
 
 async function list(req, res) {
-    account_types = await AccountType.find();
-    res.status(200).json({ status: true, message: words.account_type + messages.data_fetched, account_types });
+    data = await AccountType.find();
+    res.status(200).json({ status: true, data });
 }
 
 

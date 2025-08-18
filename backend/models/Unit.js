@@ -1,19 +1,13 @@
-const UnitSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  description: {
-    type: String,
-    trim: true
-  },
-  isActive: {
-    type: Boolean,
-    default: true
-  }
-}, {
-  timestamps: true
-});
+const mongoose = require('mongoose');
+const { baseModelFields, applyBaseSchemaMiddleware } = require('./Base');
 
-module.exports = mongoose.model('Unit', UnitSchema); 
+const unitSchemaFields = {
+    name: { type: String, required: true },
+    ...baseModelFields
+};
+
+const unitSchema = new mongoose.Schema(unitSchemaFields);
+
+applyBaseSchemaMiddleware(unitSchema);
+
+module.exports = mongoose.model('unit', unitSchema);
