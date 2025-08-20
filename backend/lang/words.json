@@ -5,5 +5,7 @@
   "account_type" : "Account Type",
   "chart_of_accounts" : "Chart Of Accounts",
   "goods" : "GOODS",
-  "service" : "SERVICE"
+  "service" : "SERVICE",
+  "tax_status" : "Tax Status",
+  "gst_rate" : "Gst Rate"
 }
