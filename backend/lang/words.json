@@ -7,5 +7,6 @@
   "goods" : "GOODS",
   "service" : "SERVICE",
   "tax_status" : "Tax Status",
-  "gst_rate" : "Gst Rate"
+  "gst_rate" : "Gst Rate",
+  "category_group" : "Category Group"
 }
