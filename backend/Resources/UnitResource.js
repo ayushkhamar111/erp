@@ -6,7 +6,8 @@ class UnitResource {
     toJSON() {
         return {
             id: this.unit._id,
-            name: this.unit.name
+            name: this.unit.name,
+            description: this.unit.description
         };
     }
 

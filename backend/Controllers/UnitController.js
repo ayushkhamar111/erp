@@ -2,6 +2,7 @@ const words = require("../lang/words.json");
 const messages = require("../lang/messages.json");
 const Unit = require("../Models/Unit");
 const UnitResource = require("../Resources/UnitResource");
+const {validateUnitInput} = require("../Validator/UnitValidator");
 
 
 async function list(req, res) {
@@ -14,6 +15,7 @@ async function list(req, res) {
     const filter = {};
     if (search) {
         filter.name = { $regex: search, $options: 'i' };
+        filter.description = { $regex: search, $options: 'i' };
     }
 
     const sort = {};
@@ -43,6 +45,12 @@ async function list(req, res) {
 
 async function store(req, res) {
     try {
+
+        const errors = await validateUnitInput(req.body, req.body.id);
+        if (errors.length > 0) {
+            return res.status(422).json({ status: false, errors });
+        }
+
         let model = await Unit.findById(req.body.id);
         let message;
 

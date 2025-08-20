@@ -11,5 +11,7 @@
   "data_fetched":" Data Fetched.",
   "not_found": "not found",
   "internal_server_error" : "Internal server error",
-  "error_deleting" : "Error Deleting "
+  "error_deleting" : "Error Deleting ",
+  "name_unique" : "Name Unique ",
+  "description_required" : "Description is required."
 }
