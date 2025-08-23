@@ -7,7 +7,7 @@ class MaterialResource {
         return {
             id: this.material._id,
             name: this.material.name,
-            description: this.material.description
+            description: this.material.description,
         };
     }
 

@@ -17,7 +17,7 @@ const materialSchemaFields = {
     name: {type: String, required: true},
     unit_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'unit',
+        ref: 'Unit',
         required: true
     },
     type: {

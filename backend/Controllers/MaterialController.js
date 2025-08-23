@@ -5,9 +5,43 @@ const MaterialResource = require("../Resources/MaterialResource");
 const {validateMaterialInput} = require("../Validator/validateMaterialInput");
 
 
+
 async function list(req, res) {
-    materials = await Material.find();
-    res.status(200).json({ status: true, message: 'Material data Fetched', materials });
+    const search = req.query.search || null;
+    const orderBy = req.query.order_by || 'id';
+    const orderDir = req.query.order_dir == 1 ? 'asc' : 'desc';
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+
+    const filter = {};
+    if (search) {
+        filter.name = { $regex: search, $options: 'i' };
+        filter.description = { $regex: search, $options: 'i' };
+    }
+
+    const sort = {};
+    sort[orderBy] = orderDir.toLowerCase() === 'asc' ? 1 : -1;
+
+    const total = await Material.countDocuments(filter);
+
+    // Get paginated data
+    const materials = await Material.find(filter)
+        .populate('unit_id', 'id name description') // include id + name + description
+        .sort(sort)
+        .skip((page - 1) * limit)
+        .limit(limit);
+
+    const data = MaterialResource.collection(materials);
+
+    return res.json({
+        status: true,
+        data,
+        total,
+        page,
+        last_page: Math.ceil(total / limit),
+        order_by: orderBy,
+        order_dir: orderDir
+    });
 }
 
 async function store(req, res) {
