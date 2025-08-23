@@ -24,6 +24,9 @@ import CreateAccountType from "./pages/CreateAccounttype";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import AccountType from "./pages/AccountType.tsx";
+import Item from "./pages/Item.tsx";
+import CreateItem from "./pages/CreateItem.tsx";
+import EditItem from "./pages/EditItem.tsx";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +43,21 @@ const App = () => (
               // <ProtectedRoute>
                 <Index />
               // </ProtectedRoute>
+            } />
+            <Route path="/item" element={
+            //  <ProtectedRoute>
+                <Item />
+             // </ProtectedRoute>
+            } />
+            <Route path="/item/create" element={
+            //  <ProtectedRoute>
+                <CreateItem />
+             // </ProtectedRoute>
+            } />
+            <Route path="/item/edit/:id" element={
+            //  <ProtectedRoute>
+                <EditItem />
+             // </ProtectedRoute>
             } />
             <Route path="/sales" element={
               // <ProtectedRoute>

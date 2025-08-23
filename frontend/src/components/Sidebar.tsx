@@ -15,12 +15,14 @@ import {
   Menu,
   X,
   LogOut,
+  Percent,
 } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Unit", href: "/units", icon: Users },
   { name: "AccountType", href: "/account-types", icon: Users },
+  { name: "Item", href: "/item", icon: Percent },
   { name: "Contacts", href: "/contacts", icon: Users },
   { name: "Invoices", href: "/invoices", icon: FileText },
   { name: "Expenses", href: "/expenses", icon: Receipt },
