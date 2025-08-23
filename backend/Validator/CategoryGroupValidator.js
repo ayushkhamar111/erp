@@ -1,12 +1,9 @@
 const messages = require('../lang/messages.json');
-const Unit = require('../models/unit');
+const CategoryGroup = require('../models/CategoryGroup');
 
-async function validateUnitInput(data, excludeId = null) {
+async function validateCategoryGroupInput(data, excludeId = null) {
     const errors = [];
 
-    if (!data.description || data.description.trim() === '') {
-        errors.push({ field: 'description', message: messages.description_required });
-    }
     if (!data.name || data.name.trim() === '') {
         errors.push({ field: 'name', message: messages.name_required });
     } else {
@@ -15,8 +12,8 @@ async function validateUnitInput(data, excludeId = null) {
             query._id = { $ne: excludeId };
         }
 
-        const existingUnit = await Unit.findOne(query);
-        if (existingUnit) {
+        const existingCategoryGroup = await CategoryGroup.findOne(query);
+        if (existingCategoryGroup) {
             errors.push({ field: 'name', message: messages.name_unique });
         }
     }
@@ -24,4 +21,4 @@ async function validateUnitInput(data, excludeId = null) {
     return errors;
 }
 
-module.exports = { validateUnitInput };
+module.exports = { validateCategoryGroupInput };

@@ -23,7 +23,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/unit',authenticate, require('./Routes/unit'));
 app.use('/api/material',authenticate, require('./Routes/material'));
 app.use('/api/gstconfiguration',authenticate, require('./Routes/gstconfiguration'));
-
+app.use('/api/categorygroup',authenticate, require('./Routes/categorygroup'));
 
 app.use('/api/branches',authenticate, require('./Routes/branch'));
 app.use('/api/vendor',authenticate, require('./Routes/vendor'));

@@ -3,7 +3,7 @@ const router = express.Router();
 const MaterialController = require('../Controllers/MaterialController');
 
 // Create
-router.post('/create',  MaterialController.create);
+router.post('/store',  MaterialController.store);
 
 // Read all
 router.post('/list',  MaterialController.list);
