@@ -14,23 +14,40 @@ const Type = {
 
 
 const materialSchemaFields = {
-  name: { type: String, required: true },
-   unit_id : {
+    name: {type: String, required: true},
+    unit_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'unit',
         required: true
-  },
-  type: {
+    },
+    type: {
         type: Number,
         enum: [GOODS, SERVICE],
         required: true
-  },
-  ...baseModelFields
-};
+    },
+    code: {type: String, required: true},
+    sac_code: {type: String},
+    purchase_price: {type: Number},
+    selling_price: {type: Number},
+    mrp: {type: Number},
+    opening_stock: {type: Number},
+    opening_stock_value: {type: Number},
+    minimum_stock_level: {type: Number},
+    tax_status: {type: Number},
+    gst_rate: {type: Number},
+    service_rate: {type: Number},
+    Warranty_period: {type: String},
+    description: {type: String},
+    ...baseModelFields
 
+};
 
 const MaterialSchema = new mongoose.Schema(materialSchemaFields);
 
 applyBaseSchemaMiddleware(MaterialSchema);
 
-module.exports = mongoose.model('Material', MaterialSchema);
+
+const Material = mongoose.models.Material || mongoose.model('Material', MaterialSchema);
+
+module.exports = Material;
+// module.exports = mongoose.model('Material', MaterialSchema);
